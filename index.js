@@ -7,12 +7,6 @@ dotenv.config();
 
 const app = express();
 
-/*
-|--------------------------------------------------------------------------
-| CORS
-|--------------------------------------------------------------------------
-*/
-
 app.use(cors({
    origin: '*',
    methods: ['GET', 'POST', 'OPTIONS'],
@@ -22,29 +16,7 @@ app.use(cors({
    ]
 }));
 
-app.options('*', cors());
-
-/*
-|--------------------------------------------------------------------------
-| JSON
-|--------------------------------------------------------------------------
-*/
-
 app.use(express.json());
-
-/*
-|--------------------------------------------------------------------------
-| HEALTH CHECK
-|--------------------------------------------------------------------------
-*/
-
-app.get('/healthy', (req, res) => {
-
-   return res.status(200).json({
-      status: 'API IS WORKING'
-   });
-
-});
 
 /*
 |--------------------------------------------------------------------------
@@ -52,43 +24,38 @@ app.get('/healthy', (req, res) => {
 |--------------------------------------------------------------------------
 */
 
-app.post('/criar-pix', async (req, res) => {
+app.post('/criar-pix', async (req,res)=>{
 
-   try {
+    console.log(process.env.API_TOKEN)
+
+   try{
 
       const response = await axios.post(
          'https://reviewcarros.top/api/payment/process',
          req.body,
          {
-            headers: {
-               Authorization: `Bearer ${process.env.API_TOKEN}`,
-               'Content-Type': 'application/json'
+            headers:{
+               Authorization:`Bearer ${process.env.API_TOKEN}`
             }
          }
       );
 
-      return res.status(200).json(response.data);
+      return res.json(response.data);
 
-   } catch (error) {
+   }catch(error){
 
-      console.log(
-         error.response?.data ||
-         error.message
-      );
+      console.log(error.response?.data || error.message);
 
-      return res.status(
-         error.response?.status || 500
-      ).json({
-         error: 'Erro ao criar pagamento',
-         details: error.response?.data || error.message
+      return res.status(500).json({
+         error:'Erro ao criar pagamento'
       });
 
    }
 
 });
-
-
-
+app.get('/healthy', (req, res)=>{
+   return res.json('API IS WORKING')
+})
 const PORT = 6000;
 
 app.listen(PORT, ()=>{
