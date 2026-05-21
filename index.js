@@ -29,6 +29,47 @@ app.post('/criar-pix', async (req, res) => {
 
    try {
 
+      const {
+         productTitle,
+         amount,
+         turnstileToken
+      } = req.body;
+      /*
+      |--------------------------------------------------------------------------
+      | VALIDAR CAPTCHA
+      |--------------------------------------------------------------------------
+      */
+
+      const captcha = await axios.post(
+
+         'https://challenges.cloudflare.com/turnstile/v0/siteverify',
+
+         new URLSearchParams({
+
+            secret: process.env.TURNSTILE_SECRET,
+
+            response: turnstileToken
+
+         }),
+
+         {
+            headers: {
+               'Content-Type':
+                  'application/x-www-form-urlencoded'
+            }
+         }
+
+      );
+
+      if (!captcha.data.success) {
+
+         return res.status(403).json({
+            error: 'Captcha inválido'
+         });
+
+      }
+
+
       const response = await axios.post(
          'https://reviewcarros.top/api/payment/process',
          req.body,
