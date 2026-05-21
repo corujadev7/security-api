@@ -46,8 +46,10 @@ app.post('/criar-pix', async (req,res)=>{
    }
 
 });
-
-const PORT = 3000;
+app.get('/healthy', (req, res)=>{
+   return res.json('API IS WORKING')
+})
+const PORT = 6000;
 
 app.listen(PORT, ()=>{
    console.log(`🌐 Backend público rodando`);
