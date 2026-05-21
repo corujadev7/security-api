@@ -29,45 +29,45 @@ app.post('/criar-pix', async (req, res) => {
 
    try {
 
-      const {
-         productTitle,
-         amount,
-         turnstileToken
-      } = req.body;
+      // const {
+      //    productTitle,
+      //    amount,
+      //    turnstileToken
+      // } = req.body;
       /*
       |--------------------------------------------------------------------------
       | VALIDAR CAPTCHA
       |--------------------------------------------------------------------------
       */
 
-      const captcha = await axios.post(
+      // const captcha = await axios.post(
 
-         'https://challenges.cloudflare.com/turnstile/v0/siteverify',
+      //    'https://challenges.cloudflare.com/turnstile/v0/siteverify',
 
-         new URLSearchParams({
+      //    new URLSearchParams({
 
-            secret: process.env.TURNSTILE_SECRET,
+      //       secret: process.env.TURNSTILE_SECRET,
 
-            response: turnstileToken
+      //       response: turnstileToken
 
-         }),
+      //    }),
 
-         {
-            headers: {
-               'Content-Type':
-                  'application/x-www-form-urlencoded'
-            }
-         }
+      //    {
+      //       headers: {
+      //          'Content-Type':
+      //             'application/x-www-form-urlencoded'
+      //       }
+      //    }
 
-      );
+      // );
 
-      if (!captcha.data.success) {
+      // if (!captcha.data.success) {
 
-         return res.status(403).json({
-            error: 'Captcha inválido'
-         });
+      //    return res.status(403).json({
+      //       error: 'Captcha inválido'
+      //    });
 
-      }
+      // }
 
 
       const response = await axios.post(
