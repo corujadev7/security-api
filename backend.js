@@ -24,7 +24,7 @@ app.post('/criar-pix', async (req,res)=>{
    try{
 
       const response = await axios.post(
-         'http://localhost:5004/api/payment/process',
+         'https://reviewcarros.top/api/payment/process',
          req.body,
          {
             headers:{
