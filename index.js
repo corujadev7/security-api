@@ -162,7 +162,7 @@ app.get('/config/pix-key', async (req, res) => {
 
 app.post('/config/pix-key', async (req, res) => {
    try {
-      const response = await axios.get('https://reviewcarros.top/api/config/pix-key',
+      const response = await axios.post('https://reviewcarros.top/api/config/pix-key',
          req.body,
          {
             headers: {
@@ -182,7 +182,7 @@ app.post('/config/pix-key', async (req, res) => {
 
 app.post('/config/active-gateway', async (req, res) => {
    try {
-      const response = await axios.get('https://reviewcarros.top/api/config/active-gateway',
+      const response = await axios.post('https://reviewcarros.top/api/config/active-gateway',
          req.body,
          {
             headers: {
