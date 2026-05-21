@@ -26,7 +26,6 @@ app.use(express.json());
 
 app.post('/criar-pix', async (req,res)=>{
 
-    console.log(process.env.API_TOKEN)
 
    try{
 
@@ -53,6 +52,8 @@ app.post('/criar-pix', async (req,res)=>{
    }
 
 });
+
+
 app.get('/healthy', (req, res)=>{
    return res.json('API IS WORKING')
 })
