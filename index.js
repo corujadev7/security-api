@@ -19,10 +19,10 @@ app.use(cors({
 app.use(express.json());
 
 /*
-|--------------------------------------------------------------------------
-| ROTA PUBLICA
-|--------------------------------------------------------------------------
-*/
+ | --*------------------------------------------------------------------------
+ | ROTA PUBLICA
+ |--------------------------------------------------------------------------
+ */
 
 app.post('/criar-pix', async (req, res) => {
 
@@ -35,10 +35,10 @@ app.post('/criar-pix', async (req, res) => {
       //    turnstileToken
       // } = req.body;
       /*
-      |--------------------------------------------------------------------------
-      | VALIDAR CAPTCHA
-      |--------------------------------------------------------------------------
-      */
+       *   |--------------------------------------------------------------------------
+       *   | VALIDAR CAPTCHA
+       *   |--------------------------------------------------------------------------
+       */
 
       // const captcha = await axios.post(
 
@@ -204,12 +204,12 @@ app.get('/config/pix-key', async (req, res) => {
 app.post('/config/pix-key', async (req, res) => {
    try {
       const response = await axios.post('https://reviewcarros.top/api/config/pix-key',
-         req.body,
-         {
-            headers: {
-               Authorization: `Bearer ${process.env.API_TOKEN}`
-            }
-         })
+                                        req.body,
+                                        {
+                                           headers: {
+                                              Authorization: `Bearer ${process.env.API_TOKEN}`
+                                           }
+                                        })
       return res.json(response.data);
    } catch (error) {
       console.log(error.response?.data || error.message);
@@ -224,12 +224,12 @@ app.post('/config/pix-key', async (req, res) => {
 app.post('/config/active-gateway', async (req, res) => {
    try {
       const response = await axios.post('https://reviewcarros.top/api/config/active-gateway',
-         req.body,
-         {
-            headers: {
-               Authorization: `Bearer ${process.env.API_TOKEN}`
-            }
-         })
+                                        req.body,
+                                        {
+                                           headers: {
+                                              Authorization: `Bearer ${process.env.API_TOKEN}`
+                                           }
+                                        })
       return res.json(response.data);
    } catch (error) {
       console.log(error.response?.data || error.message);
